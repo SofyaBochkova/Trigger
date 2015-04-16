@@ -1,0 +1,19 @@
+SET SQL DIALECT 3;
+SET TERM ^ ;
+
+CREATE OR ALTER TRIGGER UPDATE_FILM FOR FILM
+ACTIVE AFTER UPDATE POSITION 0
+AS
+begin
+  IF (OLD.f_id <> NEW.f_id) THEN
+      begin
+       UPDATE soundtrack SET film = NEW.f_id WHERE film = OLD.F_ID;
+       UPDATE style SET FILM_ID = NEW.f_id WHERE FILM_ID = OLD.F_ID;
+       UPDATE production SET FILM_ID = NEW.f_id WHERE FILM_ID = OLD.F_ID;
+       UPDATE premium SET FILM_ID = NEW.f_id WHERE FILM_ID = OLD.F_ID;
+       UPDATE part SET FILM_ID = NEW.f_id WHERE FILM_ID = OLD.F_ID;
+       UPDATE made_in SET FILM_ID = NEW.f_id WHERE FILM_ID = OLD.F_ID;
+   end
+end
+^
+SET TERM ; ^
